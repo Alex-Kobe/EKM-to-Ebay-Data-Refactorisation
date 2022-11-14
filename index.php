@@ -13,7 +13,7 @@ class ImageFormatter {
 
     public static function index(){
         // declaring the file path for the new ebay titles file
-        $new_titles_path = './Ebay Data/new ebay titles 2.csv';
+        $new_titles_path = './Ebay Data/New Ebay Titles.csv';
         
         // opening the new ebay titles
         $file = fopen($new_titles_path, 'r');
@@ -27,7 +27,7 @@ class ImageFormatter {
         fclose($file);
         
         // gets all the subdirectories from the src directory
-        $csvPaths = glob('./EKM Data/*');
+        $csvPaths = glob('./EKM Data/*.csv');
 
         self::$attributes = [ 'counter' => 1, 'size' => count($csvPaths) + 1];
         
@@ -180,13 +180,12 @@ class ImageFormatter {
 
     private static function compare_with_ebay_listings(){
         // declaring array where ebay listings will be stored 
-        $path_to_ebay_listings = 'Ebay Data\listings.csv';
+        $path_to_ebay_listings = 'Ebay Data\eBay Listings.csv.csv';
 
         $duplicate_listings_first_row = fopen('Duplicate Products.csv', 'a');
         fputcsv($duplicate_listings_first_row, [
             'item ID',
             'title of the listing',
-            'quntity of sold items',
         ]);
         fclose($duplicate_listings_first_row);
 
@@ -207,7 +206,6 @@ class ImageFormatter {
                     fputcsv($duplicate_listings, [
                         $row[0], // 'item ID'
                         $row[4], // 'title of the listing',
-                        $row[12], // 'quntity of sold items',
                     ]);
                 }
             }
